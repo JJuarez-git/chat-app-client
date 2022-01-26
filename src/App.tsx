@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import MainApp from "./pages/MainApp";
-import Login from "./pages/Login";
+import SignIn from "./pages/SignIn";
 import Footer from "./components/Footer";
 import {
   BrowserRouter as Router,
@@ -15,7 +15,7 @@ function App() {
     <Router>
       <div className="App">
         {/* <MainApp /> */}
-        <Login />
+        <SignIn />
         {/* <Footer /> */}
       </div>
       {/* <Switch>
