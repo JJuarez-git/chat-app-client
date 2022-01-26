@@ -4,6 +4,7 @@
 
 @layer base {
   html {
-    @apply font-outfit
+    @apply font-source-sans
   }
+  /* ::-webkit-scrollbar */
 }
