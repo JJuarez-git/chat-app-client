@@ -1,11 +1,11 @@
 import React, { FormEvent } from "react";
 import { useFormik } from "formik";
-import { signIn } from "../api/auth";
+import { resetPassword, signIn, signUp } from "../api/auth";
 
 const validate = (data: any) => {
   const errors: any = {};
-  if (!data.username) {
-    errors.username = "Username is required";
+  if (!data.email) {
+    errors.email = "Email is required";
   }
   if (!data.password) {
     errors.password = "Password is required";
@@ -18,14 +18,17 @@ const validate = (data: any) => {
 const SignIn = () => {
   const formik = useFormik({
     initialValues: {
-      username: "",
+      email: "",
       password: "",
     },
     validate,
     onSubmit: (values) => {
-      signIn(values).then((res) =>
+      /* signIn(values).then((res) =>
         localStorage.setItem("token", JSON.stringify(res.data.accessToken))
-      );
+      ); */
+      const { email, password } = values;
+      signUp(email, password);
+      // resetPassword(email)
     },
   });
 
@@ -37,29 +40,29 @@ const SignIn = () => {
           <p>Sign in to your account</p>
         </div>
         <form className="space-y-4" onSubmit={formik.handleSubmit}>
-          <label htmlFor="username" className="block">
-            <span className="block mb-2 font-medium">Username</span>
+          <label htmlFor="email" className="block">
+            <span className="block mb-2 font-medium">Email</span>
             <div className="relative">
               <span className="material-icons-outlined absolute left-3 top-1/2 text-xl -translate-y-1/2 text-gray-400">
                 alternate_email
               </span>
               <input
-                type="text"
-                id="username"
-                value={formik.values.username}
+                type="email"
+                id="email"
+                value={formik.values.email}
                 onChange={formik.handleChange}
-                placeholder="Enter username"
+                placeholder="Enter email"
                 className="w-full p-3 pl-11 rounded-md shadow-inner text-sm border border-gray-200 outline-amber-400"
                 required
               />
               {/* Extraer componente */}
-              {formik.errors.username ? (
+              {formik.errors.email ? (
                 <div className="flex items-center lg:absolute lg:top-1/2 lg:left-96 lg:-translate-y-1/2 bg-white w-fit px-4 py-2 rounded border border-red-500">
                   <span className="material-icons-outlined text-red-600">
                     error_outline
                   </span>
                   <span className="ml-2 font-medium text-sm">
-                    {formik.errors.username}
+                    {formik.errors.email}
                   </span>
                 </div>
               ) : null}

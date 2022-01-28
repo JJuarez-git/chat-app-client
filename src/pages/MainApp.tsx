@@ -30,7 +30,7 @@ const MainApp = (props: any) => {
           <div className="flex w-full bg-white dark:bg-neutral-700 border border-gray-300 dark:border-none">
             <section className="w-1/5 p-4 border-r border-gray-200 dark:border-zinc-800">
               <p>Lista usuarios</p>
-              <ThemeMode handleMode={handleMode} mode={mode} />
+              <ThemeMode {...{handleMode, mode}} />
               <User />
             </section>
 
