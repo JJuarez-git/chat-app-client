@@ -1,10 +1,10 @@
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from "firebase/auth";
 import { GLOBALS } from "../globals"
 import axios from "axios";
-import { firebaseApp } from '../firebase';
 import UserService from '../services/UserService';
+import { app } from '../firebaseConf';
 
-const auth = getAuth(firebaseApp)
+const auth = getAuth(app)
 const userService = UserService.instance
 
 export const signIn = (email: string, password: string) => {
