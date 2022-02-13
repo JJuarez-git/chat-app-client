@@ -1,21 +1,23 @@
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from "firebase/auth";
-import { GLOBALS } from "../globals"
-import axios from "axios";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, updateProfile } from "firebase/auth";
 import UserService from '../services/UserService';
 import { app } from '../firebaseConf';
 
 const auth = getAuth(app)
-const userService = UserService.instance
+// const userService = UserService.instance
 
-export const signIn = (email: string, password: string) => {
+export const signIn = (email: string, password: string, cb: VoidFunction) => {
     signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => userService.setEmail(userCredential.user))
-        .catch((error) => console.error(error.code, error.message))
+        .then(() => cb())
+        .catch((error) => {
+            console.error(error.code, error.message)
+            alert(error.message)
+        })
 }
 
-export const signUp = (email: string, password: string) => {
+export const signUp = (username: string, email: string, password: string, cb: VoidFunction) => {
     createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => userService.setEmail(userCredential.user))
+        .then((userCredential) => updateProfile(userCredential.user, {displayName: username}))
+        .then(() => cb())
         .catch((error) => console.error(error.code, error.message))
 }
 
@@ -25,8 +27,8 @@ export const resetPassword = (email: string) => {
         .catch((error) => console.error(error.code, error.message))
 }
 
-export const logOut = () => {
+export const logOut = (cb: VoidFunction) => {
     signOut(auth)
-        .then(() => userService.setEmail(null))
+        .then(() => cb())
         .catch((error) => console.error(error.code, error.message))
 }

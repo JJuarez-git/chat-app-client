@@ -1,22 +1,19 @@
 import React from "react";
 import "./App.css";
-import MainApp from "./pages/main/MainApp";
-import SignIn from "./pages/authentication/SignIn";
-import Footer from "./components/Footer";
 import { BrowserRouter as Router } from "react-router-dom";
-import RoutesLoader from './pages/loader/RoutesLoader';
+import RoutesLoader from "./pages/loader/RoutesLoader";
+import { Authentication } from "./pages/authentication/Authentication";
 
 function App() {
-   return (
+  return (
+    <Authentication>
       <Router>
-         <div className="App">
-            {/* <MainApp /> */}
-            {/* <SignIn /> */}
-            {/* <Footer /> */}
-            <RoutesLoader />
-         </div>
+        <div className="App">
+          <RoutesLoader />
+        </div>
       </Router>
-   );
+    </Authentication>
+  );
 }
 
 export default App;

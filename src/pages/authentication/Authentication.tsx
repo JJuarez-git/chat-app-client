@@ -1,23 +1,63 @@
+import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 import React from "react";
-import SignIn from "./SignIn";
-import SignUp from "./SignUp";
+import { signIn, logOut, signUp } from "../../api/auth";
 
-enum AuthMode {
-   SignIn = "signin",
-   SignUp = "signup"
+interface AuthContextType {
+  user: User;
+  signin: (email: string, password: string, callback: VoidFunction) => void;
+  signup: (
+    nickname: string,
+    email: string,
+    password: string,
+    callback: VoidFunction
+  ) => void;
+  logout: (callback: VoidFunction) => void;
 }
 
-const Authentication = (props: any) => {
-   const { mode } = props
+const AuthContext = React.createContext<AuthContextType>(null!);
 
-   return (
-      <div className="flex justify-center items-center h-screen bg-amber-400">
-        <div className="w-4/5 sm:w-96 bg-white rounded px-4 py-8 shadow-lg">
-          {mode === AuthMode.SignIn && <SignIn/>}
-          {mode === AuthMode.SignUp && <SignUp/>}
-        </div>
-      </div>
-    );
-}
+export const Authentication = ({ children }: { children: React.ReactNode }) => {
+  const [user, setUser] = React.useState<User>(null!);
+  const [loading, setLoading] = React.useState(true);
+  const auth = getAuth();
 
-export default Authentication
+  React.useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log("USER LOGGED!");
+        setUser(user);
+        setLoading(false);
+      } else {
+        console.log("USER NOT LOGGED");
+        setUser(null!);
+        setLoading(false);
+      }
+    });
+  }, []);
+
+  const signin = (email: string, password: string, callback: VoidFunction) => {
+    return signIn(email, password, callback);
+  };
+
+  const signup = (
+    username: string,
+    email: string,
+    password: string,
+    callback: VoidFunction
+  ) => {
+    return signUp(username, email, password, callback);
+  };
+
+  const logout = (callback: VoidFunction) => {
+    logOut(callback);
+  };
+
+  if (loading) {
+    return null;
+  }
+  
+  let value = { user, signin, signup, logout };
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+};
+
+export const useAuth = () => React.useContext(AuthContext);

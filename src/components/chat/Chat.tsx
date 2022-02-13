@@ -2,6 +2,8 @@
 import React, { FormEvent } from "react";
 import WebSocketService from "../../services/WebSocketService";
 import GroupMessage from "./GroupMessage";
+import { useAuth } from '../../pages/authentication/Authentication';
+import { User } from "firebase/auth";
 
 const WSService = WebSocketService.instance;
 const socket = WSService.socket;
@@ -16,6 +18,7 @@ interface Message {
 const Chat = (props: any) => {
   const [messages, setMessages] = React.useState<Message[]>([]);
   const [text, setText] = React.useState("");
+  const user: User = useAuth().user
 
   const handleChange = (event: any) => {
     setText(event.target.value);
@@ -24,7 +27,7 @@ const Chat = (props: any) => {
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     WSService.emit("send-message", {
-      from: "Jose",
+      from: user.displayName,
       text,
       to: "Anyone",
       time: new Date().toLocaleString(),
