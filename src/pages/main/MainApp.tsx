@@ -10,7 +10,7 @@ const MainApp = (props: any) => {
   const user = useAuth().user;
 
   React.useEffect(() => {
-    WSService.emit("config-user", { username: user.email });
+    WSService.emit("config-user", { email: user.email, username: user.displayName });
   }, []);
 
   React.useEffect(() => {

@@ -1,6 +1,8 @@
 import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 import React from "react";
 import { signIn, logOut, signUp } from "../../api/auth";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 interface AuthContextType {
   user: User;
@@ -55,7 +57,7 @@ export const Authentication = ({ children }: { children: React.ReactNode }) => {
   if (loading) {
     return null;
   }
-  
+
   let value = { user, signin, signup, logout };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

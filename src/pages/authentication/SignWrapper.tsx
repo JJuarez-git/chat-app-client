@@ -23,7 +23,7 @@ const SignWrapper = (props: any) => {
 
    return (
       <div className="flex justify-center items-center h-screen bg-amber-400">
-        <div className="w-4/5 sm:w-96 bg-white rounded px-4 py-8 shadow-lg">
+        <div className="w-4/5 sm:w-96 bg-white rounded px-4 py-8 shadow-lg max-h-screen ease-in duration-300">
           {mode === AuthMode.SignIn && <SignIn/>}
           {mode === AuthMode.SignUp && <SignUp/>}
         </div>

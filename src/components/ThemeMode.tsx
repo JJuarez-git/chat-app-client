@@ -2,6 +2,7 @@ import React from "react";
 import { useAuth } from '../pages/authentication/Authentication';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from '../pages/loader/RoutesLoader';
+import { toast } from "react-toastify";
 
 const ThemeMode = (props: any) => {
   const { handleMode, mode } = props;
@@ -37,6 +38,12 @@ const ThemeMode = (props: any) => {
         onClick={handleLogOut}
       >
         LogOut
+      </button>
+      <button
+        className="inline-flex bg-red-500 p-2 px-4 rounded-full text-white shadow-md"
+        onClick={() => toast('Esto es un mensaje', {type: 'success'})}
+      >
+        Toast
       </button>
       <p>Current: {mode}</p>
     </>

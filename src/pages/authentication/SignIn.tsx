@@ -3,16 +3,17 @@ import { useFormik } from "formik";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Modal from "../../components/Modal";
 import { useAuth } from "./Authentication";
-import { RoutePath } from '../loader/RoutesLoader';
+import { RoutePath } from "../loader/RoutesLoader";
+import { ToastContainer } from "react-toastify";
 
 const validate = (data: any) => {
   const errors: any = {};
   if (!data.email) {
     errors.email = "Email is required";
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(data.email)) {
-   errors.email = "Invalid email";
- }
- 
+    errors.email = "Invalid email";
+  }
+
   if (!data.password) {
     errors.password = "Password is required";
   }
@@ -42,6 +43,11 @@ const SignIn = () => {
 
   return (
     <>
+      {/* <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+      /> */}
       <div className="text-center space-y-2 mb-4">
         <h1 className="font-bold text-3xl">Chat App</h1>
         <p>Sign in to your account</p>
@@ -120,7 +126,10 @@ const SignIn = () => {
         </button>
         <p className="text-center text-sm">
           No account?{" "}
-          <Link to={RoutePath.SingUp} className="text-amber-400 hover:underline">
+          <Link
+            to={RoutePath.SingUp}
+            className="text-amber-400 hover:underline"
+          >
             Sign up
           </Link>
         </p>
