@@ -3,6 +3,7 @@ import UserService from '../services/UserService';
 import { app } from '../firebaseConf';
 import axios from "axios";
 import { toast } from "react-toastify";
+import { authErrorMessage } from "../utils/error/error";
 
 const auth = getAuth(app)
 // const userService = UserService.instance
@@ -11,7 +12,7 @@ export const signIn = (email: string, password: string, callback: VoidFunction) 
     return signInWithEmailAndPassword(auth, email, password)
         // .then(() => axios.post())
         .then(() => callback())
-        .catch(err => toast.error(err.message));
+        .catch(err => authErrorMessage(err.code));
 }
 
 export const signUp = (username: string, email: string, password: string, callback: VoidFunction) => {
