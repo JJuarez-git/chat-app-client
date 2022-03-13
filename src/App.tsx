@@ -14,6 +14,7 @@ function App() {
           position="bottom-right"
           autoClose={5000}
           hideProgressBar={false}
+          limit={5}
         />
         <div className="App">
           <RoutesLoader />

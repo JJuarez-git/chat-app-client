@@ -45,7 +45,7 @@ const SignUp = () => {
   });
 
   return (
-    <>
+    <React.Fragment>
       <div className="text-center space-y-2 mb-4">
         <h1 className="font-bold text-3xl">Chat App</h1>
         <p>Create an account and join our incredible community</p>
@@ -155,7 +155,7 @@ const SignUp = () => {
           </Link>
         </p>
       </form>
-    </>
+    </React.Fragment>
   );
 };
 

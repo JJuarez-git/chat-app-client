@@ -1,10 +1,10 @@
 import React, { FormEvent } from "react";
 import { useFormik } from "formik";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import Modal from "../../components/Modal";
+import Modal from "../../components/ui/Modal";
 import { useAuth } from "./Authentication";
 import { RoutePath } from "../loader/RoutesLoader";
-import { ToastContainer } from "react-toastify";
+import Fade from "../../components/ui/Fade";
 
 const validate = (data: any) => {
   const errors: any = {};
@@ -44,12 +44,7 @@ const SignIn = () => {
   });
 
   return (
-    <>
-      {/* <ToastContainer
-        position="bottom-right"
-        autoClose={5000}
-        hideProgressBar={false}
-      /> */}
+    <React.Fragment>
       <div className="text-center space-y-2 mb-4">
         <h1 className="font-bold text-3xl">Chat App</h1>
         <p>Sign in to your account</p>
@@ -87,12 +82,12 @@ const SignIn = () => {
         <label htmlFor="password" className="block">
           <div className="flex justify-between items-center mb-2">
             <span className="font-medium">Password</span>
-            <button
-              className="text-sm text-gray-500 hover:underline"
+            <span
+              className="text-sm text-gray-500 hover:underline hover:cursor-pointer"
               onClick={() => setOpen(true)}
             >
               Forgotten password?
-            </button>
+            </span>
           </div>
           <div className="relative">
             <span className="material-icons-outlined absolute left-3 top-1/2 text-xl -translate-y-1/2 text-gray-400">
@@ -136,8 +131,10 @@ const SignIn = () => {
           </Link>
         </p>
       </form>
-      <Modal open={open} />
-    </>
+      <Modal open={open} onClose={() => setOpen(false)} hasBackdrop fade>
+        Esto es un ventana modal
+      </Modal>
+    </React.Fragment>
   );
 };
 

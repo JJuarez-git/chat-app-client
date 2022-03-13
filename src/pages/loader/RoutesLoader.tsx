@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigate, PathRouteProps, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import NotFound404 from "../404/404";
 import RequireAuth from "../authentication/RequireAuth";
 import SignWrapper from "../authentication/SignWrapper";
@@ -21,7 +21,7 @@ export enum RoutePath {
 const routesList: RouteType[] = [
   {
     path: RoutePath.Root,
-    element: <Navigate to="/chat" replace={true} />,
+    element: <Navigate to={RoutePath.Chat} replace={true} />,
   },
   {
     path: RoutePath.Rest,

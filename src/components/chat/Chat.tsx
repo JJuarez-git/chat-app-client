@@ -55,7 +55,7 @@ const Chat = (props: any) => {
 
   return (
     <div className="h-full flex flex-col justify-between space-y-4">
-      <div className="p-4 bg-white dark:bg-neutral-700 border-b border-b-gray-200 dark:border-b-zinc-800">
+      <div className="flex min-h-60 items-center px-4 bg-white dark:bg-neutral-700 border-b border-b-gray-200 dark:border-b-zinc-800">
         <p>Nombre de usuario</p>
       </div>
 
@@ -78,7 +78,7 @@ const Chat = (props: any) => {
           <button
             type="submit"
             disabled={text.length === 0}
-            className="flex bg-amber-400 py-3 px-4 text-white rounded-xl hover:bg-amber-500 disabled:bg-amber-300 disabled:cursor-no-drop"
+            className="flex bg-amber-400 py-3 px-4 text-white rounded-md hover:bg-amber-500 disabled:bg-amber-300 disabled:cursor-no-drop"
             title="Send message"
           >
             <span className="material-icons">send</span>
