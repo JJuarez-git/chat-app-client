@@ -8,7 +8,7 @@ interface FadeProps {
 
 const Fade = (props: FadeProps) => {
   const { children, active = true, slow = false } = props;
-  return <div className={active ? "animate-fadeInUp" : ""}>{children}</div>;
+  return <div className={active ? "animate-fadeIn" : ""}>{children}</div>;
 };
 
 export default Fade;
