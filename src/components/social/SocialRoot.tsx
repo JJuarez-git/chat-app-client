@@ -5,7 +5,7 @@ import Button from "../ui/Button";
 import LogOut from "../auth/LogOut";
 import { Tab } from "@headlessui/react";
 import Fade from "../ui/Fade";
-import SocialTabs from "./SocialTabs";
+import SocialTabs from "./tabs/SocialTabs";
 
 const SocialRoot = (props: any) => {
   function classNames(...classes: any[]) {

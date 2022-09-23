@@ -1,0 +1,1 @@
+export const contactSelector = (state: any) => state.SOCIAL.selectedContact

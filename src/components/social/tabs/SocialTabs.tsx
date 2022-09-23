@@ -1,9 +1,9 @@
 import React from "react";
 import { Tab } from "@headlessui/react";
-import Fade from "../ui/Fade";
-import ThemeMode from "../ThemeMode";
-import LogOut from "../auth/LogOut";
-import Contacts from "./contacts/Contacts";
+import Fade from "../../ui/Fade";
+import ThemeMode from "../../ThemeMode";
+import LogOut from "../../auth/LogOut";
+import Contacts from "../contacts/Contacts";
 
 const SocialTabs = () => {
   function classNames(...classes: any[]) {

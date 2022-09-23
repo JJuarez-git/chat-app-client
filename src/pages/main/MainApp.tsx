@@ -1,5 +1,6 @@
 import React from "react";
 import Chat from "../../components/chat/Chat";
+import ChatRoot from "../../components/chat/ChatRoot";
 import SocialRoot from "../../components/social/SocialRoot";
 import WebSocketService from "../../services/WebSocketService";
 import { useAuth } from "../authentication/Authentication";
@@ -22,10 +23,7 @@ const MainApp = (props: any) => {
         <div className="flex flex-grow overflow-hidden">
           <div className="flex w-full bg-white dark:bg-neutral-700 border border-gray-300 dark:border-none">
             <SocialRoot />
-
-            <section className="w-full bg-gray-100 dark:bg-neutral-800">
-              <Chat />
-            </section>
+            <ChatRoot />
           </div>
         </div>
       </div>

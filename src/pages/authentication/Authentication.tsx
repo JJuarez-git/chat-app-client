@@ -54,12 +54,14 @@ export const Authentication = ({ children }: { children: React.ReactNode }) => {
     logOut(callback);
   };
 
-  if (loading) {
-    return null;
-  }
-
   let value = { user, signin, signup, logout };
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <React.Fragment>
+      {loading ? null : (
+        <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+      )}
+    </React.Fragment>
+  );
 };
 
 export const useAuth = () => React.useContext(AuthContext);

@@ -4,6 +4,8 @@ import WebSocketService from "../../services/WebSocketService";
 import GroupMessage from "./GroupMessage";
 import { useAuth } from '../../pages/authentication/Authentication';
 import { User } from "firebase/auth";
+import { useSelector } from "react-redux";
+import { contactSelector } from '../social/redux/selectors';
 
 const WSService = WebSocketService.instance;
 const socket = WSService.socket;
@@ -19,6 +21,8 @@ const Chat = (props: any) => {
   const [messages, setMessages] = React.useState<Message[]>([]);
   const [text, setText] = React.useState("");
   const user: User = useAuth().user
+
+  const selectedContact = useSelector(state => contactSelector(state))
 
   const handleChange = (event: any) => {
     setText(event.target.value);
@@ -56,7 +60,7 @@ const Chat = (props: any) => {
   return (
     <div className="h-full flex flex-col justify-between space-y-4">
       <div className="flex min-h-60 items-center px-4 bg-white dark:bg-neutral-700 border-b border-b-gray-200 dark:border-b-zinc-800">
-        <p>Nombre de usuario</p>
+        <p className="font-semibold">{selectedContact}</p>
       </div>
 
       <div className="flex-grow px-4 h-full overflow-y-scroll">
@@ -88,5 +92,7 @@ const Chat = (props: any) => {
     </div>
   );
 };
+
+
 
 export default Chat;

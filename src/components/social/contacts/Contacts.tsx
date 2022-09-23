@@ -1,11 +1,19 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import SearchContacts from "./SearchContacts";
+import { selectContact } from '../redux/actions';
 
-const Contacts = () => {
+const Contacts = (props: any) => {
   const [selected, setSelected] = React.useState<number>(null!);
   const [open, setOpen] = React.useState(false);
+  const dispatch = useDispatch()
 
-  function classNames(...classes: any[]) {
+  const handleSelect = (index: number, contactName: string) => {
+    setSelected(index)
+    dispatch(selectContact(contactName))
+  }
+
+  const classNames = (...classes: any[]) => {
     return classes.filter(Boolean).join(" ");
   }
 
@@ -21,7 +29,7 @@ const Contacts = () => {
     { name: "Hellen Schmidt" },
   ];
 
-  const message = "El ultimo mensaje que se envio en este chat de texto";
+  const message = "El último mensaje que se envió en este chat de texto";
 
   return (
     <div className="w-full h-auto bg-gray-200 space-y-1 p-1 overflow-y-scroll">
@@ -38,12 +46,12 @@ const Contacts = () => {
       {contacts.length > 0 &&
         contacts.map((contact, index) => (
           <div
-            key={contact.name}
+            key={index}
             className={classNames(
               "flex w-full h-16 rounded p-2 space-x-2 bg-white hover:bg-gray-100 hover:cursor-pointer",
               selected === index && "ring-2 ring-amber-400"
             )}
-            onClick={() => setSelected(index)}
+            onClick={() => handleSelect(index, contact.name)}
           >
             <img
               src={`https://source.boringavatars.com/beam/50/${contact.name}?colors=264653,2a9d8f,e9c46a,f4a261,e76f51`}
